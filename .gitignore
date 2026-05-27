@@ -1,3 +1,27 @@
 *.h5
 *.keras
 *.DS_Store
+# Virtual environments
+tfenv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Mac files
+.DS_Store
+
+# ML models
+*.h5
+*.keras
+
+# Datasets
+dataset/
+data/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VSCode
+.vscode/
