@@ -1,0 +1,44 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #0b0b0c;
+  color: #d4c9b0;
+  font-family: 'Jost', sans-serif;
+  min-height: 100vh;
+}
+.card-gold {
+  background: #0f0e0b;
+  border: 1px solid #2a2010;
+  border-radius: 4px;
+}
+.input {
+  width: 100%;
+  background: #080807;
+  border: 1px solid #1e1c17;
+  border-radius: 2px;
+  color: #d4c9b0;
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  padding: 13px 16px;
+  outline: none;
+}
+.input:focus { border-color: #c9a84c; }
+.input::placeholder { color: #2a2518; }
+.btn-primary {
+  background: linear-gradient(135deg, #c9a84c, #a8882e);
+  border: none;
+  color: #0b0b0c;
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 13px 32px;
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+.btn-primary:hover:not(:disabled) { opacity: 0.85; }
+.btn-primary:disabled { opacity: 0.35; cursor: not-allowed; }
+.serif { font-family: 'Cormorant Garamond', serif; }
+.muted { color: #5a5040; font-size: 13px; }
+.divider { border: none; border-top: 1px solid #1e1c17; }

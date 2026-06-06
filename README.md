@@ -1,26 +1,16 @@
-# Currency Detection using Deep Learning
+# React + Vite
 
-##  Overview
-This project detects Indian currency denominations using a CNN model based on ResNet50V2.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-##  Model
-- Transfer Learning with ResNet50V2
-- Fine-tuning applied
-- Data Augmentation used
+Currently, two official plugins are available:
 
-##  Dataset
-- ~1700 images
-- 7 classes (10, 20, 50, 100, 200, 500, 2000)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-##  Technologies
-- TensorFlow / Keras
-- OpenCV
-- Python
+## React Compiler
 
-##  Results
-- Training Accuracy: XX%
-- Validation Accuracy: XX%
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-##  Future Work
-- Multi-currency detection (USD, JPY)
-- Real-time camera integration
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
