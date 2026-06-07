@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from '../context/AuthContext'
-import { API_URL } from'../utils/constants'
+import { API_URL,CURRENCY_INFO,EXCHANGE_RATES,HISTORICAL_RATES } from'../utils/constants'
 import { db } from '../firebase'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 

@@ -29,7 +29,7 @@ app.add_middleware(
 modelpath = os.path.join(
     os.path.dirname(__file__),
     "model",
-    "best_multicurrency.keras"
+    "currex_final_93.keras"
 )
 
 print(f"Loading model from {modelpath}...")

@@ -1,55 +1,122 @@
-export const CURRENCIES = {
-  INR: { name: 'Indian Rupee',   country: 'India',          flag: '🇮🇳', symbol: '₹', accent: '#ff9f43' },
-  USD: { name: 'US Dollar',      country: 'United States',  flag: '🇺🇸', symbol: '$', accent: '#c9a84c' },
-  EUR: { name: 'Euro',           country: 'European Union', flag: '🇪🇺', symbol: '€', accent: '#d4af37' },
+
+
+const CURRENCY_INFO = {
+    
+    "EUR_5":     {"currency": "EUR", "denomination": 5,     "symbol": "€",  "country": "European Union", "flag": "🇪🇺"},
+    "EUR_10":    {"currency": "EUR", "denomination": 10,    "symbol": "€",  "country": "European Union", "flag": "🇪🇺"},
+    "EUR_20":    {"currency": "EUR", "denomination": 20,    "symbol": "€",  "country": "European Union", "flag": "🇪🇺"},
+    "EUR_50":    {"currency": "EUR", "denomination": 50,    "symbol": "€",  "country": "European Union", "flag": "🇪🇺"},
+    "EUR_100":   {"currency": "EUR", "denomination": 100,   "symbol": "€",  "country": "European Union", "flag": "🇪🇺"},
+
+    
+    "INR_10":    {"currency": "INR", "denomination": 10,    "symbol": "₹",  "country": "India",          "flag": "🇮🇳"},
+    "INR_20":    {"currency": "INR", "denomination": 20,    "symbol": "₹",  "country": "India",          "flag": "🇮🇳"},
+    "INR_50":    {"currency": "INR", "denomination": 50,    "symbol": "₹",  "country": "India",          "flag": "🇮🇳"},
+    "INR_100":   {"currency": "INR", "denomination": 100,   "symbol": "₹",  "country": "India",          "flag": "🇮🇳"},
+    "INR_200":   {"currency": "INR", "denomination": 200,   "symbol": "₹",  "country": "India",          "flag": "🇮🇳"},
+    "INR_500":   {"currency": "INR", "denomination": 500,   "symbol": "₹",  "country": "India",          "flag": "🇮🇳"},
+
+    
+    "JPY_1000":  {"currency": "JPY", "denomination": 1000,  "symbol": "¥",  "country": "Japan",          "flag": "🇯🇵"},
+    "JPY_2000":  {"currency": "JPY", "denomination": 2000,  "symbol": "¥",  "country": "Japan",          "flag": "🇯🇵"},
+    "JPY_5000":  {"currency": "JPY", "denomination": 5000,  "symbol": "¥",  "country": "Japan",          "flag": "🇯🇵"},
+    "JPY_10000": {"currency": "JPY", "denomination": 10000, "symbol": "¥",  "country": "Japan",          "flag": "🇯🇵"},
+
+    "KRW_1000":  {"currency": "KRW", "denomination": 1000,  "symbol": "₩", "country": "South Korea",    "flag": "🇰🇷"},
+    "KRW_5000":  {"currency": "KRW", "denomination": 5000,  "symbol": "₩", "country": "South Korea",    "flag": "🇰🇷"},
+    "KRW_10000": {"currency": "KRW", "denomination": 10000, "symbol": "₩", "country": "South Korea",    "flag": "🇰🇷"},
+    "KRW_50000": {"currency": "KRW", "denomination": 50000, "symbol": "₩", "country": "South Korea",    "flag": "🇰🇷"},
+
+    
+    "KRW_10":    {"currency": "KRW", "denomination": 10,    "symbol": "₩", "country": "South Korea",    "flag": "🇰🇷"},
+    "KRW_50":    {"currency": "KRW", "denomination": 50,    "symbol": "₩", "country": "South Korea",    "flag": "🇰🇷"},
+    "KRW_100":   {"currency": "KRW", "denomination": 100,   "symbol": "₩", "country": "South Korea",    "flag": "🇰🇷"},
+    "KRW_500":   {"currency": "KRW", "denomination": 500,   "symbol": "₩", "country": "South Korea",    "flag": "🇰🇷"},
+
+    
+    "USD_1":     {"currency": "USD", "denomination": 1,     "symbol": "$",  "country": "United States",  "flag": "🇺🇸"},
+    "USD_5":     {"currency": "USD", "denomination": 5,     "symbol": "$",  "country": "United States",  "flag": "🇺🇸"},
+    "USD_10":    {"currency": "USD", "denomination": 10,    "symbol": "$",  "country": "United States",  "flag": "🇺🇸"},
+    "USD_50":    {"currency": "USD", "denomination": 50,    "symbol": "$",  "country": "United States",  "flag": "🇺🇸"},
+    "USD_100":   {"currency": "USD", "denomination": 100,   "symbol": "$",  "country": "United States",  "flag": "🇺🇸"},
 }
 
-export const LIVE_RATES = {
-  INR: 1.0,
-  USD: 83.5,
-  EUR: 90.1,
+const EXCHANGE_RATES = {
+    "INR": 1.0,
+    "USD": 83.5,
+    "EUR": 90.1,
+    "JPY": 0.56,
+    "KRW": 0.062,
 }
 
-export const HISTORICAL_RATES = {
-  USD: [
-    { year: '2015', rate: 64.2  },
-    { year: '2016', rate: 67.1  },
-    { year: '2017', rate: 65.1  },
-    { year: '2018', rate: 68.4  },
-    { year: '2019', rate: 70.4  },
-    { year: '2020', rate: 74.1  },
-    { year: '2021', rate: 73.9  },
-    { year: '2022', rate: 78.6  },
-    { year: '2023', rate: 82.6  },
-    { year: '2024', rate: 83.5  },
-    { year: '2025', rate: 84.2  },
-  ],
-  EUR: [
-    { year: '2015', rate: 71.2  },
-    { year: '2016', rate: 74.4  },
-    { year: '2017', rate: 73.5  },
-    { year: '2018', rate: 80.1  },
-    { year: '2019', rate: 78.3  },
-    { year: '2020', rate: 84.6  },
-    { year: '2021', rate: 87.5  },
-    { year: '2022', rate: 82.7  },
-    { year: '2023', rate: 89.0  },
-    { year: '2024', rate: 90.1  },
-    { year: '2025', rate: 91.5  },
-  ],
-  INR: [
-    { year: '2015', rate: 1.0 },
-    { year: '2016', rate: 1.0 },
-    { year: '2017', rate: 1.0 },
-    { year: '2018', rate: 1.0 },
-    { year: '2019', rate: 1.0 },
-    { year: '2020', rate: 1.0 },
-    { year: '2021', rate: 1.0 },
-    { year: '2022', rate: 1.0 },
-    { year: '2023', rate: 1.0 },
-    { year: '2024', rate: 1.0 },
-    { year: '2025', rate: 1.0 },
-  ],
+const HISTORICAL_RATES = {
+    "USD": [
+        {"year": "2015", "rate": 64.2},
+        {"year": "2016", "rate": 67.1},
+        {"year": "2017", "rate": 65.1},
+        {"year": "2018", "rate": 68.4},
+        {"year": "2019", "rate": 70.4},
+        {"year": "2020", "rate": 74.1},
+        {"year": "2021", "rate": 73.9},
+        {"year": "2022", "rate": 78.6},
+        {"year": "2023", "rate": 82.6},
+        {"year": "2024", "rate": 83.5},
+        {"year": "2025", "rate": 84.2},
+    ],
+    "EUR": [
+        {"year": "2015", "rate": 71.2},
+        {"year": "2016", "rate": 74.4},
+        {"year": "2017", "rate": 73.5},
+        {"year": "2018", "rate": 80.1},
+        {"year": "2019", "rate": 78.3},
+        {"year": "2020", "rate": 84.6},
+        {"year": "2021", "rate": 87.5},
+        {"year": "2022", "rate": 82.7},
+        {"year": "2023", "rate": 89.0},
+        {"year": "2024", "rate": 90.1},
+        {"year": "2025", "rate": 91.5},
+    ],
+    "JPY": [
+        {"year": "2015", "rate": 0.53},
+        {"year": "2016", "rate": 0.61},
+        {"year": "2017", "rate": 0.58},
+        {"year": "2018", "rate": 0.61},
+        {"year": "2019", "rate": 0.65},
+        {"year": "2020", "rate": 0.70},
+        {"year": "2021", "rate": 0.67},
+        {"year": "2022", "rate": 0.60},
+        {"year": "2023", "rate": 0.60},
+        {"year": "2024", "rate": 0.56},
+        {"year": "2025", "rate": 0.55},
+    ],
+    "KRW": [
+        {"year": "2015", "rate": 0.057},
+        {"year": "2016", "rate": 0.058},
+        {"year": "2017", "rate": 0.060},
+        {"year": "2018", "rate": 0.061},
+        {"year": "2019", "rate": 0.059},
+        {"year": "2020", "rate": 0.059},
+        {"year": "2021", "rate": 0.061},
+        {"year": "2022", "rate": 0.064},
+        {"year": "2023", "rate": 0.064},
+        {"year": "2024", "rate": 0.062},
+        {"year": "2025", "rate": 0.063},
+    ],
+    "INR": [
+        {"year": "2015", "rate": 1.0},
+        {"year": "2016", "rate": 1.0},
+        {"year": "2017", "rate": 1.0},
+        {"year": "2018", "rate": 1.0},
+        {"year": "2019", "rate": 1.0},
+        {"year": "2020", "rate": 1.0},
+        {"year": "2021", "rate": 1.0},
+        {"year": "2022", "rate": 1.0},
+        {"year": "2023", "rate": 1.0},
+        {"year": "2024", "rate": 1.0},
+        {"year": "2025", "rate": 1.0},
+    ],
 }
 
-export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+ const API_URL= "http://localhost:8000";
+
+ export { API_URL, CURRENCY_INFO, EXCHANGE_RATES, HISTORICAL_RATES };
