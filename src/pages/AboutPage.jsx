@@ -139,7 +139,7 @@ export default function AboutPage() {
                 <span style={{ fontSize: 28 }}>{flag}</span>
                 <span style={{
                   fontSize: 10, padding: '3px 8px', border: '1px solid #2a2010',
-                  color: '#4a4235', letterSpacing: 1, borderRadius: 1
+                  color: '#b5945f', letterSpacing: 1, borderRadius: 1
                 }}>{code}</span>
               </div>
               <p style={{ fontSize: 15, color: '#d4c9b0', fontWeight: 500, marginBottom: 2 }}>{name}</p>

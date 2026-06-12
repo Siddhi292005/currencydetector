@@ -234,13 +234,13 @@ export default function HomePage() {
                 <div style={{ textAlign: 'center', padding: 56 }}>
                   <div style={{
                     fontFamily: 'serif', fontSize: 44,
-                    color: '#2a2010', marginBottom: 18, opacity: 0.6
+                    color: '#d6b785', marginBottom: 18, opacity: 0.6
                   }}>◈</div>
-                  <p className="serif" style={{ fontSize: 18, color: '#4a4235', marginBottom: 8 }}>
+                  <p className="serif" style={{ fontSize: 18, color: '#987c50', marginBottom: 8 }}>
                     Drop currency image here
                   </p>
                   <p className="muted">or click to browse files</p>
-                  <p style={{ fontSize: 10, color: '#1e1c17', marginTop: 18, letterSpacing: 2, textTransform: 'uppercase' }}>
+                  <p style={{ fontSize: 10, color: '#f3dea7', marginTop: 18, letterSpacing: 2, textTransform: 'uppercase' }}>
                     JPG · PNG · WEBP
                   </p>
                 </div>
@@ -274,7 +274,7 @@ export default function HomePage() {
               {!camActive && !preview && (
                 <div style={{ textAlign: 'center', padding: 48 }}>
                   <div style={{ fontSize: 36, marginBottom: 14, opacity: 0.15, fontFamily: 'serif' }}>◉</div>
-                  <p className="serif" style={{ fontSize: 16, color: '#3a3020' }}>Camera not active</p>
+                  <p className="serif" style={{ fontSize: 16, color: '#e8c286' }}>Camera not active</p>
                 </div>
               )}
               {/* Alignment guides */}

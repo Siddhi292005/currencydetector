@@ -24,7 +24,7 @@ export default function ResultPage() {
           background: '#0f0e0b', border: '1px solid #2a2010',
           padding: '10px 14px', borderRadius: 2
         }}>
-          <p style={{ fontSize: 11, color: '#4a4235', marginBottom: 4 }}>{label}</p>
+          <p style={{ fontSize: 11, color: '#f3ca88', marginBottom: 4 }}>{label}</p>
           <p style={{ fontSize: 15, color: '#c9a84c', fontFamily: 'serif' }}>
             ₹{payload[0].value}
           </p>

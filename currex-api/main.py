@@ -3,17 +3,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from tensorflow.keras.models import load_model
 import numpy as np
 import os
-
+import httpx
+from datetime import datetime
 from utils.predict import preprocess_image, decode
 from utils.constants import (
     CURRENCY_INFO,
-    EXCHANGE_RATES,
-    HISTORICAL_RATES
+    FALLBACK_RATES,
+    FALLBACK_HISTORICAL
 )
 
 app = FastAPI(
     title="currexapi",
-    description="multicurrency recognition api - inr, usd, eur",
+    description="multicurrency recognition api - inr, usd, eur, jpy, krw",
     version="1.0.0"
 )
 
@@ -31,8 +32,88 @@ modelpath = os.path.join(
     "model",
     "currex_final_93.keras"
 )
+_rates_cache = {}
+_historical_cache = {}
 
+async def getliverates():
+    global _rates_cache
+    if _rates_cache.get('timestamp'):
+        age=(datetime.now() - _rates_cache['timestamp']).total_seconds()
+        if age < 3600:
+            return _rates_cache['rates']
+    try:
+        async with httpx.AsyncClient() as client:
+            res = await client.get('https://api.frankfurter.dev/v1/latest?from=INR&to=USD,EUR,JPY,KRW')
+            res.raise_for_status()
+            data = res.json()
+            rates = data.get("rates", {})
+            converted={
+                'INR':1.0,
+                "USD": rates.get("USD", FALLBACK_RATES["USD"]),
+                "EUR": rates.get("EUR", FALLBACK_RATES["EUR"]),
+                "JPY": rates.get("JPY", FALLBACK_RATES["JPY"]),
+                "KRW": rates.get("KRW", FALLBACK_RATES["KRW"])
+            }
+            _rates_cache = {
+                'timestamp': datetime.now(),
+                'rates': converted
+            }
+            return converted
+    except Exception as e:
+        print(f"Error fetching live rates: {e}")
+        return FALLBACK_RATES
+    
+async def gethistoricalrates(currency: str):
+    global _historical_cache
+
+    if currency in _historical_cache:
+        return _historical_cache[currency]
+
+    if currency not in ["USD", "EUR", "JPY", "KRW"]:
+        return FALLBACK_HISTORICAL.get(currency, [])
+
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            history = []
+            years = range(2015, 2026)
+
+            for year in years:
+                try:
+                    date = f"{year}-06-15"
+
+                    res = await client.get(
+                        f"https://api.frankfurter.dev/v1/{date}?from={currency}&to=INR"
+                    )
+
+                    res.raise_for_status()
+
+                    data = res.json()
+                    print("Historical response:", data)
+                    rate = data.get("rates", {}).get("INR")
+
+                    if rate:
+                        history.append({
+                            "date": date,
+                            "rate": round(rate, 4)
+                        })
+
+                except Exception as e:
+                    print(f"Failed {currency} {year}: {e}")
+
+            if history:
+                _historical_cache[currency] = history
+                print(
+                    f"Historical rates fetched for {currency}: {len(history)} points"
+                )
+                return history
+
+            return FALLBACK_HISTORICAL.get(currency, [])
+
+    except Exception as e:
+        print(f"Error fetching historical rates for {currency}: {e}")
+        return FALLBACK_HISTORICAL.get(currency, [])
 print(f"Loading model from {modelpath}...")
+
 
 model = load_model(modelpath)
 
@@ -91,10 +172,10 @@ async def predict(file: UploadFile = File(...)):
 
     currency = info["currency"]
     denomination = info["denomination"]
-
-    rate = EXCHANGE_RATES.get(currency, 1.0)
-
+    rates=await getliverates()
+    rate = rates.get(currency, FALLBACK_RATES.get(currency, 1.0))
     inr_value = round(denomination * rate, 2)
+    historical = await gethistoricalrates(currency)
 
     return {
         "success": True,
@@ -108,17 +189,12 @@ async def predict(file: UploadFile = File(...)):
         "inr_value": inr_value,
         "confidence": round(confidence, 2),
         "exchange_rate": rate,
-        "historical_rates": HISTORICAL_RATES.get(currency, []),
+        "historical_rates": historical,
         "top_predictions": top_predictions
     }
 
 
-@app.get("/rates")
-def get_rates():
-    return {
-        "rates": EXCHANGE_RATES,
-        "historical": HISTORICAL_RATES
-    }
+
 
 
 @app.get("/classes")

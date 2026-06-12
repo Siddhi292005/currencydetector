@@ -56,7 +56,7 @@ export default function HistoryPage() {
         }}>Scan History</h2>
         <p style={{
           fontFamily: 'Cormorant Garamond, serif',
-          color: '#3a3020', fontSize: 15, marginTop: 6, fontStyle: 'italic'
+          color: '#ffffff', fontSize: 15, marginTop: 6, fontStyle: 'italic'
         }}>
           {loading ? 'Loading...' : `${scans.length} scan${scans.length !== 1 ? 's' : ''} recorded`}
         </p>
@@ -79,7 +79,7 @@ export default function HistoryPage() {
         <div style={{ textAlign: 'center', padding: '80px 48px' }}>
           <div style={{
             fontFamily: 'Cormorant Garamond, serif',
-            fontSize: 48, color: '#1a1810', marginBottom: 20
+            fontSize: 48, color: '#f5efd7', marginBottom: 20
           }}>◎</div>
           <p style={{
             fontFamily: 'Cormorant Garamond, serif',
@@ -132,7 +132,7 @@ export default function HistoryPage() {
               {/* Rank */}
               <span style={{
                 fontFamily: 'Cormorant Garamond, serif',
-                fontSize: 22, color: '#2a2010', width: 28, flexShrink: 0
+                fontSize: 22, color: '#e2cfaf', width: 28, flexShrink: 0
               }}>{i + 1}</span>
 
               {/* Flag */}
@@ -147,7 +147,7 @@ export default function HistoryPage() {
                   }}>{scan.faceValue}</span>
                   <span style={{
                     fontSize: 10, padding: '2px 7px',
-                    border: '1px solid #1a1810', color: '#3a3020',
+                    border: '1px solid #a18f4a', color: '#e9bd77',
                     letterSpacing: 1, borderRadius: 1,
                     fontFamily: "'Jost', sans-serif"
                   }}>{scan.currency}</span>
@@ -156,10 +156,10 @@ export default function HistoryPage() {
                   <span style={{ fontSize: 13, color: '#c9a84c' }}>
                     ₹{scan.inrValue?.toLocaleString()}
                   </span>
-                  <span style={{ fontSize: 11, color: '#2a2010' }}>
+                  <span style={{ fontSize: 11, color: '#f0e0c6' }}>
                     {formatDate(scan.timestamp)}
                   </span>
-                  <span style={{ fontSize: 11, color: '#2a2010' }}>
+                  <span style={{ fontSize: 11, color: '#fce7c5' }}>
                     · {scan.confidence?.toFixed(1)}% confidence
                   </span>
                 </div>

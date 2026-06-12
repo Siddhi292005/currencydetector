@@ -29,15 +29,14 @@ CURRENCY_INFO = {
     "USD_100":   {"currency": "USD", "denomination": 100,   "symbol": "$",  "country": "United States",  "flag": "🇺🇸"},
 }
 
-EXCHANGE_RATES = {
+FALLBACK_RATES = {
     "INR": 1.0,
     "USD": 83.5,
     "EUR": 90.1,
     "JPY": 0.56,
     "KRW": 0.062,
 }
-
-HISTORICAL_RATES = {
+FALLBACK_HISTORICAL = {
     "USD": [
         {"year": "2015", "rate": 64.2}, {"year": "2016", "rate": 67.1},
         {"year": "2017", "rate": 65.1}, {"year": "2018", "rate": 68.4},
@@ -71,11 +70,6 @@ HISTORICAL_RATES = {
         {"year": "2025", "rate": 0.063},
     ],
     "INR": [
-        {"year": "2015", "rate": 1.0}, {"year": "2016", "rate": 1.0},
-        {"year": "2017", "rate": 1.0}, {"year": "2018", "rate": 1.0},
-        {"year": "2019", "rate": 1.0}, {"year": "2020", "rate": 1.0},
-        {"year": "2021", "rate": 1.0}, {"year": "2022", "rate": 1.0},
-        {"year": "2023", "rate": 1.0}, {"year": "2024", "rate": 1.0},
-        {"year": "2025", "rate": 1.0},
+        {"year": str(y), "rate": 1.0} for y in range(2015, 2026)
     ],
 }
