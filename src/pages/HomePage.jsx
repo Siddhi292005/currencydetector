@@ -352,7 +352,7 @@ export default function HomePage() {
             background: '#0f0e0b', border: '1px solid #2a2010',
             borderRadius: 4, padding: '20px 18px'
           }}>
-            <p style={{ fontSize: 10, color: '#3a3020', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 14 }}>
+            <p style={{ fontSize: 10, color: '#d9a654', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 14 }}>
               Supported Currencies
             </p>
             {[
@@ -369,7 +369,7 @@ export default function HomePage() {
                 <span style={{ fontSize: 20 }}>{flag}</span>
                 <div style={{ flex: 1 }}>
                   <p style={{ fontSize: 13, color: '#d4c9b0', fontWeight: 500 }}>{name}</p>
-                  <p style={{ fontSize: 11, color: '#3a3020' }}>{code}</p>
+                  <p style={{ fontSize: 11, color: '#9c773c' }}>{code}</p>
                 </div>
                 <span style={{ fontFamily: 'serif', fontSize: 20, color: '#c9a84c' }}>{symbol}</span>
               </div>
@@ -381,7 +381,7 @@ export default function HomePage() {
             background: '#0f0e0b', border: '1px solid #1e1c17',
             borderRadius: 4, padding: '16px 18px'
           }}>
-            <p style={{ fontSize: 10, color: '#2a2010', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
+            <p style={{ fontSize: 10, color: '#cb8719', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
               Tips for best results
             </p>
             {[

@@ -118,7 +118,7 @@ export default function AboutPage() {
       {/* ── Supported currencies ── */}
       <div style={{ marginBottom: 48 }}>
         <p style={{
-          fontSize: 11, color: '#4a4235', letterSpacing: 3,
+          fontSize: 11, color: '#e4ac4b', letterSpacing: 3,
           textTransform: 'uppercase', textAlign: 'center', marginBottom: 28
         }}>Supported Currencies</p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
@@ -126,6 +126,8 @@ export default function AboutPage() {
             { code: 'INR', flag: '🇮🇳', name: 'Indian Rupee',   country: 'India',          symbol: '₹', denoms: '₹10 ₹20 ₹50 ₹100 ₹200 ₹500',      rate: '1.00' },
             { code: 'USD', flag: '🇺🇸', name: 'US Dollar',      country: 'United States',  symbol: '$', denoms: '$1 $5 $10 $50 $100',                rate: '83.5' },
             { code: 'EUR', flag: '🇪🇺', name: 'Euro',           country: 'European Union', symbol: '€', denoms: '€5 €10 €20 €50 €100',               rate: '90.1' },
+            { code: 'JPY', flag: '🇯🇵', name: 'Japanese Yen',   country: 'Japan',          symbol: '¥', denoms: '¥1000 ¥2000 ¥5000 ¥10000',         rate: '58.5' },
+            { code: 'KRW', flag: '🇰🇷', name: 'Korean Won',     country: 'South Korea',    symbol: '₩', denoms: '₩1000 ₩5000 ₩10000',              rate: '0.07' },
           ].map(({ code, flag, name, country, symbol, denoms, rate }) => (
             <div key={code} style={{
               background: '#0f0e0b', border: '1px solid #2a2010',
@@ -143,9 +145,9 @@ export default function AboutPage() {
                 }}>{code}</span>
               </div>
               <p style={{ fontSize: 15, color: '#d4c9b0', fontWeight: 500, marginBottom: 2 }}>{name}</p>
-              <p style={{ fontSize: 11, color: '#3a3020', marginBottom: 12 }}>{country}</p>
-              <p style={{ fontSize: 11, color: '#4a4235', marginBottom: 6, lineHeight: 1.7 }}>{denoms}</p>
-              <p style={{ fontSize: 11, color: '#2a2010', borderTop: '1px solid #1e1c17', paddingTop: 8, marginTop: 8 }}>
+              <p style={{ fontSize: 11, color: '#8d682d', marginBottom: 12 }}>{country}</p>
+              <p style={{ fontSize: 11, color: '#e8e2da', marginBottom: 6, lineHeight: 1.7 }}>{denoms}</p>
+              <p style={{ fontSize: 11, color: '#724805', borderTop: '1px solid #1e1c17', paddingTop: 8, marginTop: 8 }}>
                 1 {code} = ₹{rate}
               </p>
             </div>
