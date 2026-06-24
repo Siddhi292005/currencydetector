@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from '../context/AuthContext'
-import { API_URL,CURRENCY_INFO,EXCHANGE_RATES,HISTORICAL_RATES } from'../utils/constants'
+import { API_URL } from '../utils/constants'
 import { db } from '../firebase'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 
@@ -76,7 +76,6 @@ export default function HomePage() {
     setLoading(true)
     setError('')
 
-    // Cycle loading messages
     let mi = 0
     const iv = setInterval(() => {
       mi = (mi + 1) % LOAD_MSGS.length
@@ -93,7 +92,6 @@ export default function HomePage() {
 
       const result = res.data
 
-      // Save to Firestore
       if (user) {
         await addDoc(collection(db, 'users', user.uid, 'scans'), {
           currency:     result.currency,
@@ -108,7 +106,6 @@ export default function HomePage() {
         })
       }
 
-      // Navigate to result page with data
       navigate('/result', { state: { result, imageUrl: preview } })
 
     } catch (err) {
@@ -147,7 +144,7 @@ export default function HomePage() {
           }}>Recognition</span>
         </h2>
         <p className="serif" style={{
-          color: '#4a4235', fontSize: 16, marginTop: 12,
+          color: '#aa8e5f', fontSize: 16, marginTop: 12,
           fontStyle: 'italic', maxWidth: 480, lineHeight: 1.8
         }}>
           Upload or photograph any banknote. AI identifies the currency,
@@ -208,7 +205,6 @@ export default function HomePage() {
                       display: 'flex', flexDirection: 'column',
                       alignItems: 'center', justifyContent: 'center', gap: 18
                     }}>
-                      {/* Scan line */}
                       <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
                         <div style={{
                           position: 'absolute', left: 0, right: 0, height: 1,
@@ -216,7 +212,6 @@ export default function HomePage() {
                           animation: 'scan 2.8s ease-in-out infinite'
                         }} />
                       </div>
-                      {/* Spinner */}
                       <div style={{
                         width: 34, height: 34,
                         border: '1px solid #c9a84c',
@@ -284,7 +279,6 @@ export default function HomePage() {
                     position: 'absolute', top: '20%', left: '10%', right: '10%', bottom: '20%',
                     border: '1px solid rgba(201,168,76,0.3)', borderRadius: 2
                   }} />
-                  {/* Corner brackets */}
                   {[
                     { top: '20%', left: '10%', borderTop: '2px solid #c9a84c', borderLeft: '2px solid #c9a84c' },
                     { top: '20%', right: '10%', borderTop: '2px solid #c9a84c', borderRight: '2px solid #c9a84c' },
@@ -297,6 +291,19 @@ export default function HomePage() {
               )}
             </div>
           )}
+
+          {/* Disclaimer — shows for both tabs */}
+          <div style={{
+            display: 'flex', alignItems: 'flex-start', gap: 10,
+            background: 'rgba(201,168,76,0.04)', border: '1px solid #2a2010',
+            borderRadius: 2, padding: '10px 14px', marginTop: 14
+          }}>
+            <span style={{ color: '#c9a84c', fontSize: 13, lineHeight: 1, marginTop: 1 }}>ⓘ</span>
+            <p style={{ fontSize: 12, color: '#a08a63', lineHeight: 1.6 }}>
+              Please photograph or upload <span style={{ color: '#c9a84c' }}>only one banknote at a time</span>.
+              Images with multiple or overlapping notes may produce inaccurate results.
+            </p>
+          </div>
 
           {/* Error message */}
           {error && (
@@ -369,9 +376,9 @@ export default function HomePage() {
                 <span style={{ fontSize: 20 }}>{flag}</span>
                 <div style={{ flex: 1 }}>
                   <p style={{ fontSize: 13, color: '#d4c9b0', fontWeight: 500 }}>{name}</p>
-                  <p style={{ fontSize: 11, color: '#9c773c' }}>{code}</p>
+                  <p style={{ fontSize: 11, color: '#d3a151' }}>{code}</p>
                 </div>
-                <span style={{ fontFamily: 'serif', fontSize: 20, color: '#c9a84c' }}>{symbol}</span>
+                <span style={{ fontFamily: 'serif', fontSize: 20, color: '#f0cd6e' }}>{symbol}</span>
               </div>
             ))}
           </div>
@@ -381,7 +388,7 @@ export default function HomePage() {
             background: '#0f0e0b', border: '1px solid #1e1c17',
             borderRadius: 4, padding: '16px 18px'
           }}>
-            <p style={{ fontSize: 10, color: '#cb8719', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
+            <p style={{ fontSize: 10, color: '#f0c074', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
               Tips for best results
             </p>
             {[
@@ -389,9 +396,10 @@ export default function HomePage() {
               'Place note flat on dark surface',
               'Note should fill 70–90% of frame',
               'Avoid glare on polymer notes',
+              'Photograph one note at a time',
             ].map((t, i) => (
               <p key={i} style={{
-                fontSize: 12, color: '#4a4235', marginBottom: 8,
+                fontSize: 12, color: '#f2d09a', marginBottom: 8,
                 paddingLeft: 12, borderLeft: '1px solid #1e1c17', lineHeight: 1.5
               }}>· {t}</p>
             ))}
@@ -400,7 +408,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* CSS for animations */}
       <style>{`
         @keyframes scan {
           0% { top: 0; } 100% { top: 100%; }

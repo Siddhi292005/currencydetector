@@ -21,7 +21,12 @@ export default function Navbar() {
           CURREX
         </span>
         <div style={{display:'flex', gap:24}}>
-          {[['/', 'Home'], ['/history', 'History'], ['/about', 'About']].map(([to, label]) => (
+          {[
+            ['/', 'Home'],
+            ['/history', 'History'],
+            ['/tech', 'Tech Stack'],
+            ['/about', 'About']
+          ].map(([to, label]) => (
             <NavLink key={to} to={to} end={to=='/'}
               style={({isActive}) => ({
                 color: isActive ? '#c9a84c' : '#6b6355',
