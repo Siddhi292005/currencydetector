@@ -34,7 +34,7 @@ print(f"Model loaded - output shape: {model.output_shape}")
 # ── Rate caches ────────────────────────────────────────────────────
 _rates_cache     = {}
 _historical_cache = {}
-CONFIDENCE_THRESHOLD = 30.0
+CONFIDENCE_THRESHOLD = 45.0
 
 # ── Rate functions ─────────────────────────────────────────────────
 async def get_live_rates():
@@ -151,9 +151,14 @@ async def predict(file: UploadFile = File(...)):
         preds = model.predict(arr, verbose=0)
         top_preds = decode(preds, top_k=3)
         top       = top_preds[0]
+        runner_up = top_preds[1]["confidence"]
+        margin    = top["confidence"] - runner_up
         print(f"DEBUG top3: {top_preds}")
+
         if top["confidence"] < CONFIDENCE_THRESHOLD:
             continue
+        if top["confidence"] < 60.0 and margin < 12.0:
+            continue  # weak AND ambiguous vs runner-up — reject rather than guess wrong
 
         class_label = top["class_label"]
         if class_label not in CURRENCY_INFO:
