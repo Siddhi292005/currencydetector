@@ -49,7 +49,7 @@ async def get_live_rates():
     try:
         async with httpx.AsyncClient(timeout=5.0) as client:
             res = await client.get(
-                'https://api.frankfurter.app/latest?from=INR&to=USD,EUR,JPY,KRW'
+                'https://api.frankfurter.dev/v1/latest?from=INR&to=USD,EUR,JPY,KRW'
             )
             data  = res.json()
             rates = data.get('rates', {})
@@ -61,7 +61,7 @@ async def get_live_rates():
                 'JPY': round(1 / rates['JPY'], 4) if 'JPY' in rates else FALLBACK_RATES['JPY'],
                 'KRW': round(1 / rates['KRW'], 4) if 'KRW' in rates else FALLBACK_RATES['KRW'],
             }
-
+            print(f" Live rates fetched: {converted}")
             _rates_cache = {
                 'rates':     converted,
                 'timestamp': datetime.now()
@@ -89,7 +89,7 @@ async def get_historical_rates(currency: str):
             for year in range(2015, 2026):
                 date = f"{year}-06-15"
                 res  = await client.get(
-                    f'https://api.frankfurter.app/{date}?from={currency}&to=INR'
+                    f'https://api.frankfurter.dev/v1/{date}?from={currency}&to=INR'
                 )
                 if res.status_code == 200:
                     data = res.json()
@@ -99,6 +99,7 @@ async def get_historical_rates(currency: str):
 
         if history:
             _historical_cache[currency] = history
+            print(f"Historical rates fetched for {currency}: {len(history)} data points — {history}") 
             return history
 
     except Exception as e:
@@ -123,7 +124,7 @@ def health():
 @app.get("/rates")
 async def get_rates():
     rates = await get_live_rates()
-    return {"rates": rates, "source": "frankfurter.app"}
+    return {"rates": rates, "source": "frankfurter.dev"}
 
 @app.get("/classes")
 def get_classes():
@@ -197,7 +198,7 @@ async def predict(file: UploadFile = File(...)):
             **results[0]
         }
 
-# ── Multiple notes ─────────────────────────────────────────────
+    # ── Multiple notes ─────────────────────────────────────────────
     total_inr = sum(r["inr_value"] for r in results)
     primary   = results[0]
 
