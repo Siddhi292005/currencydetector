@@ -48,7 +48,7 @@ export default function TechStackPage() {
 
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: 48 }}>
-        <div style={{ color: '#2a2010', fontSize: 11, letterSpacing: 3, marginBottom: 14 }}>
+        <div style={{ color: '#674d24', fontSize: 11, letterSpacing: 3, marginBottom: 14 }}>
           ✦ ──────── ✦
         </div>
         <h2 style={{
@@ -102,7 +102,7 @@ export default function TechStackPage() {
                     <p style={{ fontSize: 13, color: '#d4c9b0', fontWeight: 500, marginBottom: 3 }}>
                       {name}
                     </p>
-                    <p style={{ fontSize: 12, color: '#4a4235', lineHeight: 1.6 }}>
+                    <p style={{ fontSize: 12, color: '#a7772b', lineHeight: 1.6 }}>
                       {desc}
                     </p>
                   </div>

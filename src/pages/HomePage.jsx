@@ -106,7 +106,7 @@ export default function HomePage() {
         }).catch(err => console.error('Failed to save scan history:', err))
       }
 
-    
+
 
     } catch (err) {
       setError(
@@ -118,7 +118,7 @@ export default function HomePage() {
       setLoading(false)
     }
 
-    
+
   }
 
   const clear = () => {
@@ -132,13 +132,13 @@ export default function HomePage() {
 
       {/* Header */}
       <div style={{ marginBottom: 44 }}>
-        <div style={{ color: '#2a2010', fontSize: 11, letterSpacing: 3, marginBottom: 14 }}>
+        <div style={{ color: '#4a4030', fontSize: 11, letterSpacing: 3, marginBottom: 14 }}>
           ✦ ──────── ✦
         </div>
-        <h2 className="display" style={{ fontSize: 44, fontWeight: 500, color: '#d4c9b0', lineHeight: 1.1 }}>
+        <h2 className="display" style={{ fontSize: 44, fontWeight: 500, color: '#ede3cc', lineHeight: 1.1 }}>
           Currency{' '}
           <span style={{
-            background: 'linear-gradient(90deg, #c9a84c, #f5e6a3, #c9a84c)',
+            background: 'linear-gradient(90deg, #d9bb6a, #f5e6a3, #d9bb6a)',
             backgroundSize: '200% auto',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -146,7 +146,7 @@ export default function HomePage() {
           }}>Recognition</span>
         </h2>
         <p className="serif" style={{
-          color: '#aa8e5f', fontSize: 16, marginTop: 12,
+          color: '#c9b088', fontSize: 16, marginTop: 12,
           fontStyle: 'italic', maxWidth: 480, lineHeight: 1.8
         }}>
           Upload or photograph any banknote. AI identifies the currency,
@@ -168,8 +168,8 @@ export default function HomePage() {
                   fontFamily: "'Jost', sans-serif", fontSize: 11,
                   letterSpacing: 2, textTransform: 'uppercase', cursor: 'pointer',
                   padding: '11px 20px', transition: 'all 0.2s',
-                  color: tab === t ? '#c9a84c' : '#3a3020',
-                  borderBottom: tab === t ? '1px solid #c9a84c' : '1px solid transparent',
+                  color: tab === t ? '#d9bb6a' : '#c8b390',
+                  borderBottom: tab === t ? '1px solid #d9bb6a' : '1px solid transparent',
                 }}>
                 {label}
               </button>
@@ -184,13 +184,13 @@ export default function HomePage() {
               onDrop={e => { e.preventDefault(); setDrag(false); handleFile(e.dataTransfer.files[0]) }}
               onClick={() => !preview && fileRef.current?.click()}
               style={{
-                border: `1px dashed ${drag ? '#c9a84c' : '#1e1c17'}`,
+                border: `1px dashed ${drag ? '#d9bb6a' : '#2a2518'}`,
                 borderRadius: 4, minHeight: 320,
                 display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center',
                 cursor: preview ? 'default' : 'pointer',
                 position: 'relative', overflow: 'hidden',
-                background: drag ? 'rgba(201,168,76,0.025)' : 'transparent',
+                background: drag ? 'rgba(217,187,106,0.025)' : 'transparent',
                 transition: 'all 0.2s'
               }}>
               {preview ? (
@@ -210,18 +210,18 @@ export default function HomePage() {
                       <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
                         <div style={{
                           position: 'absolute', left: 0, right: 0, height: 1,
-                          background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.7), transparent)',
+                          background: 'linear-gradient(90deg, transparent, rgba(217,187,106,0.7), transparent)',
                           animation: 'scan 2.8s ease-in-out infinite'
                         }} />
                       </div>
                       <div style={{
                         width: 34, height: 34,
-                        border: '1px solid #c9a84c',
+                        border: '1px solid #d9bb6a',
                         borderTopColor: 'transparent',
                         borderRadius: '50%',
                         animation: 'spin 1s linear infinite'
                       }} />
-                      <p style={{ color: '#c9a84c', fontSize: 11, letterSpacing: 2, textTransform: 'uppercase' }}>
+                      <p style={{ color: '#d9bb6a', fontSize: 11, letterSpacing: 2, textTransform: 'uppercase' }}>
                         {loadMsg}
                       </p>
                     </div>
@@ -231,12 +231,12 @@ export default function HomePage() {
                 <div style={{ textAlign: 'center', padding: 56 }}>
                   <div style={{
                     fontFamily: 'serif', fontSize: 44,
-                    color: '#d6b785', marginBottom: 18, opacity: 0.6
+                    color: '#e2c496', marginBottom: 18, opacity: 0.7
                   }}>◈</div>
-                  <p className="serif" style={{ fontSize: 18, color: '#987c50', marginBottom: 8 }}>
+                  <p className="serif" style={{ fontSize: 18, color: '#c4a878', marginBottom: 8 }}>
                     Drop currency image here
                   </p>
-                  <p className="muted">or click to browse files</p>
+                  <p className="muted" style={{ color: '#9a8b6e' }}>or click to browse files</p>
                   <p style={{ fontSize: 10, color: '#f3dea7', marginTop: 18, letterSpacing: 2, textTransform: 'uppercase' }}>
                     JPG · PNG · WEBP
                   </p>
@@ -251,7 +251,7 @@ export default function HomePage() {
           {/* Camera tab */}
           {tab === 'camera' && (
             <div style={{
-              border: '1px solid #1a1810', borderRadius: 4,
+              border: '1px solid #2a2518', borderRadius: 4,
               overflow: 'hidden', minHeight: 320,
               background: '#080807', display: 'flex',
               flexDirection: 'column', alignItems: 'center',
@@ -270,7 +270,7 @@ export default function HomePage() {
               )}
               {!camActive && !preview && (
                 <div style={{ textAlign: 'center', padding: 48 }}>
-                  <div style={{ fontSize: 36, marginBottom: 14, opacity: 0.15, fontFamily: 'serif' }}>◉</div>
+                  <div style={{ fontSize: 36, marginBottom: 14, opacity: 0.2, fontFamily: 'serif' }}>◉</div>
                   <p className="serif" style={{ fontSize: 16, color: '#e8c286' }}>Camera not active</p>
                 </div>
               )}
@@ -279,13 +279,13 @@ export default function HomePage() {
                 <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
                   <div style={{
                     position: 'absolute', top: '20%', left: '10%', right: '10%', bottom: '20%',
-                    border: '1px solid rgba(201,168,76,0.3)', borderRadius: 2
+                    border: '1px solid rgba(217,187,106,0.35)', borderRadius: 2
                   }} />
                   {[
-                    { top: '20%', left: '10%', borderTop: '2px solid #c9a84c', borderLeft: '2px solid #c9a84c' },
-                    { top: '20%', right: '10%', borderTop: '2px solid #c9a84c', borderRight: '2px solid #c9a84c' },
-                    { bottom: '20%', left: '10%', borderBottom: '2px solid #c9a84c', borderLeft: '2px solid #c9a84c' },
-                    { bottom: '20%', right: '10%', borderBottom: '2px solid #c9a84c', borderRight: '2px solid #c9a84c' },
+                    { top: '20%', left: '10%', borderTop: '2px solid #d9bb6a', borderLeft: '2px solid #d9bb6a' },
+                    { top: '20%', right: '10%', borderTop: '2px solid #d9bb6a', borderRight: '2px solid #d9bb6a' },
+                    { bottom: '20%', left: '10%', borderBottom: '2px solid #d9bb6a', borderLeft: '2px solid #d9bb6a' },
+                    { bottom: '20%', right: '10%', borderBottom: '2px solid #d9bb6a', borderRight: '2px solid #d9bb6a' },
                   ].map((style, i) => (
                     <div key={i} style={{ position: 'absolute', width: 20, height: 20, ...style }} />
                   ))}
@@ -297,12 +297,12 @@ export default function HomePage() {
           {/* Disclaimer — shows for both tabs */}
           <div style={{
             display: 'flex', alignItems: 'flex-start', gap: 10,
-            background: 'rgba(201,168,76,0.04)', border: '1px solid #2a2010',
+            background: 'rgba(217,187,106,0.05)', border: '1px solid #3a301c',
             borderRadius: 2, padding: '10px 14px', marginTop: 14
           }}>
-            <span style={{ color: '#c9a84c', fontSize: 13, lineHeight: 1, marginTop: 1 }}>ⓘ</span>
-            <p style={{ fontSize: 12, color: '#a08a63', lineHeight: 1.6 }}>
-              Please photograph or upload <span style={{ color: '#c9a84c' }}>only one banknote at a time</span>.
+            <span style={{ color: '#d9bb6a', fontSize: 13, lineHeight: 1, marginTop: 1 }}>ⓘ</span>
+            <p style={{ fontSize: 12, color: '#bfa87e', lineHeight: 1.6 }}>
+              Please photograph or upload <span style={{ color: '#d9bb6a' }}>only one banknote at a time</span>.
               Images with multiple or overlapping notes may produce inaccurate results.
             </p>
           </div>
@@ -310,9 +310,9 @@ export default function HomePage() {
           {/* Error message */}
           {error && (
             <p style={{
-              color: '#c9784c', fontSize: 12, marginTop: 12,
-              padding: '10px 14px', border: '1px solid #3a1a0a',
-              borderRadius: 2, background: 'rgba(201,120,76,0.05)'
+              color: '#e0967a', fontSize: 12, marginTop: 12,
+              padding: '10px 14px', border: '1px solid #4a2414',
+              borderRadius: 2, background: 'rgba(224,150,122,0.06)'
             }}>{error}</p>
           )}
 
@@ -334,8 +334,8 @@ export default function HomePage() {
                   Analyse Currency
                 </button>
                 <button onClick={clear} style={{
-                  background: 'transparent', border: '1px solid #2a2518',
-                  color: '#6b6355', fontFamily: "'Jost', sans-serif",
+                  background: 'transparent', border: '1px solid #3a3020',
+                  color: '#a89a85', fontFamily: "'Jost', sans-serif",
                   fontSize: 12, letterSpacing: 1.5, textTransform: 'uppercase',
                   cursor: 'pointer', padding: '10px 22px', borderRadius: 2,
                   transition: 'all 0.2s'
@@ -344,8 +344,8 @@ export default function HomePage() {
             )}
             {tab === 'upload' && !preview && (
               <button onClick={() => fileRef.current?.click()} style={{
-                background: 'transparent', border: '1px solid #2a2518',
-                color: '#6b6355', fontFamily: "'Jost', sans-serif",
+                background: 'transparent', border: '1px solid #3a3020',
+                color: '#a89a85', fontFamily: "'Jost', sans-serif",
                 fontSize: 12, letterSpacing: 1.5, textTransform: 'uppercase',
                 cursor: 'pointer', padding: '10px 22px', borderRadius: 2, flex: 1
               }}>Browse Files</button>
@@ -358,10 +358,10 @@ export default function HomePage() {
 
           {/* Supported currencies */}
           <div style={{
-            background: '#0f0e0b', border: '1px solid #2a2010',
+            background: '#0f0e0b', border: '1px solid #3a301c',
             borderRadius: 4, padding: '20px 18px'
           }}>
-            <p style={{ fontSize: 10, color: '#d9a654', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 14 }}>
+            <p style={{ fontSize: 10, color: '#e8bd6e', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 14 }}>
               Supported Currencies
             </p>
             {[
@@ -377,8 +377,8 @@ export default function HomePage() {
               }}>
                 <span style={{ fontSize: 20 }}>{flag}</span>
                 <div style={{ flex: 1 }}>
-                  <p style={{ fontSize: 13, color: '#d4c9b0', fontWeight: 500 }}>{name}</p>
-                  <p style={{ fontSize: 11, color: '#d3a151' }}>{code}</p>
+                  <p style={{ fontSize: 13, color: '#ede3cc', fontWeight: 500 }}>{name}</p>
+                  <p style={{ fontSize: 11, color: '#e0b466' }}>{code}</p>
                 </div>
                 <span style={{ fontFamily: 'serif', fontSize: 20, color: '#f0cd6e' }}>{symbol}</span>
               </div>
@@ -387,7 +387,7 @@ export default function HomePage() {
 
           {/* Tips */}
           <div style={{
-            background: '#0f0e0b', border: '1px solid #1e1c17',
+            background: '#0f0e0b', border: '1px solid #2a2518',
             borderRadius: 4, padding: '16px 18px'
           }}>
             <p style={{ fontSize: 10, color: '#f0c074', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
@@ -402,7 +402,7 @@ export default function HomePage() {
             ].map((t, i) => (
               <p key={i} style={{
                 fontSize: 12, color: '#f2d09a', marginBottom: 8,
-                paddingLeft: 12, borderLeft: '1px solid #1e1c17', lineHeight: 1.5
+                paddingLeft: 12, borderLeft: '1px solid #2a2518', lineHeight: 1.5
               }}>· {t}</p>
             ))}
           </div>
