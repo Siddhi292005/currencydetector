@@ -91,7 +91,7 @@ export default function HomePage() {
       })
 
       const result = res.data
-
+      navigate('/result', { state: { result, imageUrl: preview } })
       if (user) {
         await addDoc(collection(db, 'users', user.uid, 'scans'), {
           currency:     result.currency,
@@ -103,10 +103,10 @@ export default function HomePage() {
           flag:         result.flag,
           classLabel:   result.class_label,
           timestamp:    serverTimestamp(),
-        })
+        }).catch(err => console.error('Failed to save scan history:', err))
       }
 
-      navigate('/result', { state: { result, imageUrl: preview } })
+    
 
     } catch (err) {
       setError(
@@ -117,6 +117,8 @@ export default function HomePage() {
       clearInterval(iv)
       setLoading(false)
     }
+
+    
   }
 
   const clear = () => {

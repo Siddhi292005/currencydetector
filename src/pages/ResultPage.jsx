@@ -37,6 +37,7 @@ export default function ResultPage() {
   return (
     <div style={{ maxWidth: 1020, margin: '0 auto', padding: '52px 48px 80px' }}>
 
+      {/* ── Header ── */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 36 }}>
         <button onClick={() => navigate('/')} style={{
           background: 'transparent', border: '1px solid #2a2518',
@@ -56,10 +57,90 @@ export default function ResultPage() {
         }}>New Scan</button>
       </div>
 
+      {/* ── Multiple notes banner ── */}
+      {result.multiple_detected && result.count > 1 && (
+        <div style={{
+          background: 'rgba(201,168,76,0.06)', border: '1px solid #2a2010',
+          borderRadius: 4, padding: '14px 20px', marginBottom: 20,
+          display: 'flex', alignItems: 'flex-start', gap: 12
+        }}>
+          <span style={{ color: '#c9a84c', fontSize: 16, marginTop: 1 }}>◈</span>
+          <div>
+            <p style={{ fontSize: 13, color: '#c9a84c', fontWeight: 500, marginBottom: 4 }}>
+              {result.count} notes detected in this image
+            </p>
+            <p style={{ fontSize: 12, color: '#6b6355', lineHeight: 1.6 }}>
+              Multiple currency notes found. Showing the primary detection below.
+              For best accuracy, photograph one note at a time.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* ── All detected notes summary ── */}
+      {result.multiple_detected && result.notes?.length > 1 && (
+        <div style={{
+          background: '#0f0e0b', border: '1px solid #1e1c17',
+          borderRadius: 4, padding: '16px 20px', marginBottom: 28
+        }}>
+          <p style={{
+            fontSize: 10, color: '#755e38', letterSpacing: 2,
+            textTransform: 'uppercase', marginBottom: 14
+          }}>All Detected Notes</p>
+
+          {result.notes.map((note, i) => (
+            <div key={i} style={{
+              display: 'flex', alignItems: 'center', gap: 12,
+              padding: '9px 0',
+              borderBottom: i < result.notes.length - 1 ? '1px solid #1a1810' : 'none'
+            }}>
+              <span style={{ fontSize: 20, flexShrink: 0 }}>{note.flag}</span>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontSize: 13, color: '#d4c9b0', fontWeight: 500 }}>
+                  {note.face_value}
+                </p>
+                <p style={{ fontSize: 11, color: '#c8a469' }}>{note.country}</p>
+              </div>
+              <div style={{ textAlign: 'right' }}>
+                <p style={{ fontSize: 13, color: '#c9a84c' }}>
+                  ₹{note.inr_value?.toLocaleString()}
+                </p>
+                <p style={{ fontSize: 10, color: '#e7b96e' }}>
+                  {note.confidence?.toFixed(1)}% conf
+                </p>
+              </div>
+            </div>
+          ))}
+
+          {/* Total */}
+          <div style={{
+            display: 'flex', justifyContent: 'space-between',
+            alignItems: 'center', paddingTop: 12, marginTop: 4,
+            borderTop: '1px solid #2a2010'
+          }}>
+            <span style={{
+              fontSize: 10, color: '#b6a07c', letterSpacing: 2, textTransform: 'uppercase'
+            }}>
+              Total INR Value
+            </span>
+            <span style={{
+              fontFamily: 'Cormorant Garamond, serif', fontSize: 20, color: '#c9a84c'
+            }}>
+              ₹{result.notes
+                  .reduce((sum, n) => sum + (n.inr_value || 0), 0)
+                  .toLocaleString()}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* ── Main result grid ── */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28 }}>
 
+        {/* ── LEFT COLUMN ── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
 
+          {/* Image */}
           <div style={{
             background: '#0f0e0b', border: '1px solid #1e1c17',
             borderRadius: 4, overflow: 'hidden', position: 'relative'
@@ -83,6 +164,7 @@ export default function ResultPage() {
             </div>
           </div>
 
+          {/* Primary result card */}
           <div style={{
             background: '#0f0e0b', border: '1px solid #2a2010',
             borderRadius: 4, padding: 24, position: 'relative', overflow: 'hidden'
@@ -92,20 +174,26 @@ export default function ResultPage() {
               background: 'linear-gradient(135deg, rgba(201,168,76,0.04) 0%, transparent 60%)',
               pointerEvents: 'none'
             }} />
-            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 20 }}>
+
+            {/* Currency header */}
+            <div style={{
+              display: 'flex', alignItems: 'flex-start',
+              justifyContent: 'space-between', marginBottom: 20
+            }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 <span style={{ fontSize: 36 }}>{result.flag}</span>
                 <div>
                   <h3 style={{
                     fontFamily: 'Cormorant Garamond, serif',
                     fontSize: 24, color: '#d4c9b0', fontWeight: 400, marginBottom: 2
-                  }}>{result.currency === 'INR' ? 'Indian Rupee' :
-                      result.currency === 'USD' ? 'US Dollar' :
-                      result.currency === 'EUR' ? 'Euro' :
-                      result.currency === 'JPY' ? 'Japanese Yen' :
-                      result.currency === 'KRW' ? 'Korean Won' : result.currency}
+                  }}>
+                    {result.currency === 'INR' ? 'Indian Rupee' :
+                     result.currency === 'USD' ? 'US Dollar'   :
+                     result.currency === 'EUR' ? 'Euro'        :
+                     result.currency === 'JPY' ? 'Japanese Yen':
+                     result.currency === 'KRW' ? 'Korean Won'  : result.currency}
                   </h3>
-                  <p style={{ fontSize: 12, color: '#3a3020' }}>{result.country}</p>
+                  <p style={{ fontSize: 12, color: '#b19568' }}>{result.country}</p>
                 </div>
               </div>
               <span style={{
@@ -118,6 +206,7 @@ export default function ResultPage() {
               </span>
             </div>
 
+            {/* Values grid */}
             <div style={{
               display: 'grid', gridTemplateColumns: '1fr 1fr',
               gap: 1, background: '#1a1810',
@@ -131,10 +220,16 @@ export default function ResultPage() {
                 { label: 'Confidence',     value: `${result.confidence?.toFixed(1)}%` },
               ].map(({ label, value }) => (
                 <div key={label} style={{ background: '#0f0e0b', padding: '13px 14px' }}>
-                  <p style={{ fontSize: 10, color: '#2a2010', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 4 }}>
+                  <p style={{
+                    fontSize: 10, color: '#b2925f', letterSpacing: 2,
+                    textTransform: 'uppercase', marginBottom: 4
+                  }}>
                     {label}
                   </p>
-                  <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 18, color: '#c9a84c', fontWeight: 400 }}>
+                  <p style={{
+                    fontFamily: 'Cormorant Garamond, serif',
+                    fontSize: 18, color: '#c9a84c', fontWeight: 400
+                  }}>
                     {value}
                   </p>
                 </div>
@@ -142,13 +237,15 @@ export default function ResultPage() {
             </div>
           </div>
 
+          {/* Quick reference */}
           <div style={{
             background: '#0f0e0b', border: '1px solid #1e1c17',
             borderRadius: 4, padding: '16px 18px'
           }}>
-            <p style={{ fontSize: 10, color: '#3a3020', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
-              Quick Reference
-            </p>
+            <p style={{
+              fontSize: 10, color: '#a5895d', letterSpacing: 2,
+              textTransform: 'uppercase', marginBottom: 12
+            }}>Quick Reference</p>
             {[1, 5, 10, 50, 100].map(mult => (
               <div key={mult} style={{
                 display: 'flex', justifyContent: 'space-between',
@@ -168,25 +265,26 @@ export default function ResultPage() {
         {/* ── RIGHT COLUMN ── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
 
-          {/* 10 year chart */}
+          {/* 10-year chart */}
           <div style={{
             background: '#0f0e0b', border: '1px solid #1e1c17',
             borderRadius: 4, padding: 24
           }}>
             <div style={{ marginBottom: 20 }}>
-              <p style={{ fontSize: 10, color: '#3a3020', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 6 }}>
-                10-Year Exchange Rate vs INR
-              </p>
+              <p style={{
+                fontSize: 10, color: '#3a3020', letterSpacing: 2,
+                textTransform: 'uppercase', marginBottom: 6
+              }}>10-Year Exchange Rate vs INR</p>
               <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, color: '#c9a84c' }}>
                 1 {result.currency} = ₹{result.exchange_rate}
               </p>
               <p style={{ fontSize: 11, color: '#3a3020', marginTop: 4 }}>
                 {chartData.length > 0 ? (
                   (() => {
-                    const first = chartData[0]?.rate
-                    const last  = chartData[chartData.length - 1]?.rate
+                    const first  = chartData[0]?.rate
+                    const last   = chartData[chartData.length - 1]?.rate
                     const change = ((last - first) / first * 100).toFixed(1)
-                    const up = last > first
+                    const up     = last > first
                     return (
                       <span style={{ color: up ? '#4e9a6e' : '#c9784c' }}>
                         {up ? '▲' : '▼'} {Math.abs(change)}% since {chartData[0]?.year}
@@ -203,7 +301,7 @@ export default function ResultPage() {
                   <defs>
                     <linearGradient id="goldGradient" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%"  stopColor="#c9a84c" stopOpacity={0.2} />
-                      <stop offset="95%" stopColor="#c9a84c" stopOpacity={0} />
+                      <stop offset="95%" stopColor="#c9a84c" stopOpacity={0}   />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="#1a1810" />
@@ -219,14 +317,12 @@ export default function ResultPage() {
                   <Tooltip content={<CustomTooltip />} />
                   <ReferenceLine
                     y={result.exchange_rate}
-                    stroke="#c9a84c" strokeDasharray="4 4"
-                    strokeOpacity={0.5}
+                    stroke="#c9a84c" strokeDasharray="4 4" strokeOpacity={0.5}
                   />
                   <Area
                     type="monotone" dataKey="rate"
                     stroke="#c9a84c" strokeWidth={1.5}
-                    fill="url(#goldGradient)"
-                    dot={false}
+                    fill="url(#goldGradient)" dot={false}
                     activeDot={{ r: 4, fill: '#c9a84c', stroke: '#0f0e0b', strokeWidth: 2 }}
                   />
                 </AreaChart>
@@ -240,32 +336,36 @@ export default function ResultPage() {
             )}
           </div>
 
+          {/* Top predictions */}
           {result.top_predictions?.length > 0 && (
             <div style={{
               background: '#0f0e0b', border: '1px solid #1e1c17',
               borderRadius: 4, padding: '16px 18px'
             }}>
-              <p style={{ fontSize: 10, color: '#3a3020', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
-                Top Predictions
-              </p>
+              <p style={{
+                fontSize: 10, color: '#a08a66', letterSpacing: 2,
+                textTransform: 'uppercase', marginBottom: 12
+              }}>Top Predictions</p>
               {result.top_predictions.map(({ class_label, confidence }, i) => (
                 <div key={class_label} style={{
                   display: 'flex', alignItems: 'center', gap: 12,
                   padding: '8px 0', borderBottom: '1px solid #0f0e0b'
                 }}>
-                  <span style={{ fontSize: 11, color: '#2a2010', width: 16 }}>{i + 1}</span>
+                  <span style={{ fontSize: 11, color: '#d2b079', width: 16 }}>{i + 1}</span>
                   <span style={{ flex: 1, fontSize: 13, color: i === 0 ? '#c9a84c' : '#6b6355' }}>
                     {class_label}
                   </span>
-                 
-                  <div style={{ width: 80, height: 4, background: '#1a1810', borderRadius: 2, overflow: 'hidden' }}>
+                  <div style={{
+                    width: 80, height: 4, background: '#1a1810',
+                    borderRadius: 2, overflow: 'hidden'
+                  }}>
                     <div style={{
                       width: `${confidence}%`, height: '100%',
                       background: i === 0 ? '#c9a84c' : '#2a2010',
                       borderRadius: 2
                     }} />
                   </div>
-                  <span style={{ fontSize: 11, color: '#4a4235', width: 44, textAlign: 'right' }}>
+                  <span style={{ fontSize: 11, color: '#807159', width: 44, textAlign: 'right' }}>
                     {confidence.toFixed(1)}%
                   </span>
                 </div>
@@ -273,13 +373,15 @@ export default function ResultPage() {
             </div>
           )}
 
+          {/* Denomination guide */}
           <div style={{
             background: '#0f0e0b', border: '1px solid #1e1c17',
             borderRadius: 4, padding: '16px 18px'
           }}>
-            <p style={{ fontSize: 10, color: '#3a3020', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 12 }}>
-              All {result.currency} Denominations
-            </p>
+            <p style={{
+              fontSize: 10, color: '#3a3020', letterSpacing: 2,
+              textTransform: 'uppercase', marginBottom: 12
+            }}>All {result.currency} Denominations</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
               {getDenominations(result.currency).map(d => (
                 <span key={d} style={{

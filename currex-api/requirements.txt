@@ -1,1 +1,8 @@
+fastapi
+uvicorn[standard]
+tensorflow-cpu
+numpy
+httpx
+opencv-python-headless
+pillow
 python-multipart==0.0.20
